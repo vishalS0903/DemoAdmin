@@ -20,12 +20,12 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required', 'string', 'unique:permissions,name'
+            'name' => ['required', 'string', 'unique:permissions,name']
         ]);
         Permission::create([
             'name' => $request->name
         ]);
-        return redirect()->route('permission.index')->with('success','Updated Added');
+        return redirect()->route('permission.index')->with('success','permission Added!');
 
     }
 
@@ -45,13 +45,21 @@ class PermissionController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required', 'string', 'unique:permissions,name'
+            'name' => ['required', 'string', 'unique:permissions,name']
         ]);
         $permission =    Permission::find($id);
 
         $permission->name = $request->name;
         $permission->save();
 
-        return redirect()->route('permission.index')->with('success','Updated Permission');
+        return redirect()->route('permission.index')->with('success','Updated Permission!');
+    }
+
+    public function destroy($permissionId)
+    {
+        $permission = Permission::find($permissionId);
+        $permission->delete();
+        return redirect()->route('permission.index')->with('success','Deleted Permission!');
+
     }
 }

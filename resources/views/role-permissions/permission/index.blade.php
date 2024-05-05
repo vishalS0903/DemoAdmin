@@ -51,7 +51,7 @@
                         <a href="{{ route('permission.edit',$permission->id)}}" class="btn btn-lg btn-clean btn-icon" title="Edit">
                           <i class="la la-edit"></i>
                         </a>
-                        <a href="javascript:;" class="btn btn-lg btn-clean btn-icon" title="Delete">
+                        <a href="{{ route('permission.delete',$permission->id)}}" class="btn btn-lg btn-clean btn-icon" title="Delete">
                           <i class="la la-trash"></i>
                         </a>
                       </td>

@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
      * List of applications to add.
      */
     private $permissions = [
-        'role-list',
-        'role-create',
-        'role-edit',
-        'role-delete',
-        'product-list',
-        'product-create',
-        'product-edit',
-        'product-delete'
+        // 'role-list',
+        // 'role-create',
+        // 'role-edit',
+        // 'role-delete',
+        // 'product-list',
+        // 'product-create',
+        // 'product-edit',
+        // 'product-delete'
     ];
 
 

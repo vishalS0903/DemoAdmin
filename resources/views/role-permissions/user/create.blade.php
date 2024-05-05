@@ -7,11 +7,11 @@
             <div class="card card-custom">
                 <div class="card-header flex-wrap py-5">
                     <div class="card-title">
-                        <h3 class="card-label">Create permission</h3>
+                        <h3 class="card-label">Create Role</h3>
                     </div>
                 </div>
                 <div class="card-body">
-                    @if($errors->has('name'))
+                    {{-- @if($errors->has('name'))
                     <div class="alert alert-custom alert-outline-danger fade show mb-5" role="alert">
                         <div class="alert-icon"><i class="flaticon-warning"></i></div>
                         <div class="alert-text">{{ $errors->first('name') }}</div>
@@ -21,11 +21,23 @@
                             </button>
                         </div>
                     </div>
-                    @endif
+                    @endif --}}
+
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                     <div class="row justify-content-center">
+
+
                         <div class="col-xl-12 col-xxl-7">
-                            <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form" method="POST"
-                                action="{{ route('permission.store') }}">
+                            <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form" method="POST" action="{{ url('users') }}">
                                 @csrf
                                 <!--begin: Form -->
 
@@ -35,20 +47,36 @@
                                     <label>Name</label>
                                     <input class="form-control" type="text" name="name" />
                                 </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" type="email" name="email" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="form-control" type="password" name="password" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select name="role[]" id="" class="form-control" multiple>
+                                        @foreach ($roles as $role)
+                                        <option value="{{$role->name}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <!--end::Input-->
 
                                 <!--begin:Actions-->
                                 <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                     <div class="mr-2">
-                                        <button type="button"
-                                            class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4">
-                                            Cancel
-                                        </button>
+                                        <a href="{{url('users')}}">
+                                            <button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4">
+                                                Cancel
+                                            </button>
+                                        </a>
                                     </div>
                                     <div>
-                                        <button type="submit"
-                                            class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" id="kt_sweetalert_demo_3_3">
+                                        <button type="submit" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" id="kt_sweetalert_demo_3_3">
                                             Submit
                                         </button>
                                     </div>
@@ -66,9 +94,5 @@
         <!--end::Container-->
     </div>
     <!--end::Entry-->
-    {{-- <Script>
-        $("#kt_sweetalert_demo_3_3").click(function(e) {
-    Swal.fire("Good job!", "You clicked the button!", "success");
-});
-    </Script> --}}
+
 </x-admin-layout>
